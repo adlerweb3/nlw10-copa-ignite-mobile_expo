@@ -1,10 +1,10 @@
 import { NativeBaseProvider, StatusBar } from 'native-base';
-
 import { useFonts, Roboto_400Regular, Roboto_500Medium, Roboto_700Bold } from '@expo-google-fonts/roboto';
-import { THEME } from './src/styles/theme';
 
+import { AuthContextProvider } from './src/contexts/AuthContext';
 import { Loading } from './src/components/Loading';
 import { SingIn } from './src/screens/SignIn'
+import { THEME } from './src/styles/theme';
 
 
 export default function App() {
@@ -12,15 +12,17 @@ export default function App() {
 
   return (
     <NativeBaseProvider theme={THEME} >
+      <AuthContextProvider> {/*Login Session Provider*/}
 
-      <StatusBar
-        barStyle="light-content"
-        backgroundColor="transparent"
-        translucent
-      />
+        <StatusBar
+          barStyle="light-content"
+          backgroundColor="transparent"
+          translucent
+        />
 
-      {fontsLoaded ? <SingIn /> : <Loading />}
+        {fontsLoaded ? <SingIn /> : <Loading />}
 
+      </AuthContextProvider>
     </NativeBaseProvider>
   );
 }
